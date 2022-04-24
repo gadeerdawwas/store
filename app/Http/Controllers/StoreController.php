@@ -95,22 +95,20 @@ class StoreController extends Controller
     }
     public function storelogin(Request $request)
     {
-        // return $request;
-        // $credentials=['email' => $request->email ,'password'=> $request->password];
-
-        // try {
-        //     if(Auth::guard($request->input('guard'))->attempt($credentials ,true)){
-        //         // return response()->json([
-        //         //     'message' => 'Loggined in successfully'
-        //         // ],Response::HTTP_OK);
-
-        //         return 'okkk';
-        //     }
-        // } catch (\Throwable $th) {
-        //    return 'no';
-        // }
-      
- 
+        $validator=Validator($request->all(),[
+            'email' => 'required|string|exists:stores,email',
+            'password' =>'required|string'
+        ]);
+        if (!$validator->fails()) {
+            $store=Store::where('email','=',$request->email)->first();
+            if (Hash::check($request->password ,$store->password)) {
+                return redirect('/dashboard');
+            }else{
+                return redirect('/login');
+            }
+        }else{
+            return redirect('/login');
+        }
     }
 
 
