@@ -15,6 +15,8 @@
     @include('dashboard.include.header')
     <!-- Header -->
     <!-- Header -->
+    {{-- @include('dashboard.include.flash-message') --}}
+
     @yield('content')
     <!-- Page content -->
     

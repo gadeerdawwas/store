@@ -48,6 +48,7 @@
                         </div>
                     </div>
                 </div>
+
                 <ul class="navbar-nav mr-auto">
 
                     <li class="nav-item">
@@ -71,6 +72,21 @@
 
         <!-- Page content -->
         <div class="container mt--8 pb-5">
+            @if ($message = Session::get('success'))
+                <div class="alert alert-success alert-block">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>{{ $message }}</strong>
+                </div>
+            @endif
+
+
+            @if ($message = Session::get('error'))
+                <div class="alert alert-danger alert-block">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>{{ $message }}</strong>
+                </div>
+            @endif
+
             <!-- Table -->
             <div class="row justify-content-center" style="    margin-top: 240px;">
                 <div class="col-lg-6 col-md-8">
@@ -83,7 +99,7 @@
                             <form method="POST" action="{{ route('login') }}" method="POST">
                                 @csrf
 
-                             
+
 
 
                                 <div class="form-group">
@@ -91,39 +107,49 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                                         </div>
-                                        <input class="form-control" name="email" placeholder="ادخل الإيميل"
+                                        <input class="form-control @error('email') is-invalid @enderror" name="email" placeholder="ادخل الإيميل"
                                             type="email">
+                                        @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
 
-                            
+
 
                                 <div class="form-group">
                                     <div class="input-group input-group-merge input-group-alternative">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                         </div>
-                                        <input class="form-control" name="password" placeholder="ادخل كلمة المرور"
+                                        <input class="form-control @error('password') is-invalid @enderror" name="password" placeholder="ادخل كلمة المرور"
                                             type="password">
+                                        @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
-                               
-                              
+
+
 
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary mt-4">   تسجيل دخول  </button>
-                                 
+                                    <button type="submit" class="btn btn-primary mt-4"> تسجيل دخول </button>
+
                                 </div>
 
                                 <div class="form-group">
-                                
-                                    <div class="input-group-prepend">
-                                        <label >
-                                             <a href="{{ route('register') }}">  إنشاء حساب</a>
-                                          </label>                                       
-                                     </div>
 
-                            </div>
+                                    <div class="input-group-prepend">
+                                        <label>
+                                            <a href="{{ route('register') }}"> إنشاء حساب</a>
+                                        </label>
+                                    </div>
+
+                                </div>
                             </form>
                         </div>
                     </div>

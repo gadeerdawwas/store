@@ -88,8 +88,15 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
                                         </div>
-                                        <input class="form-control" name="first_name" placeholder="ادخل الإسم الاول"
-                                            type="text">
+                                        <input class="form-control @error('first_name') is-invalid @enderror"
+                                            value="{{ old('first_name') }}" name="first_name"
+                                            placeholder="ادخل الإسم الاول" type="text">
+
+                                        @error('first_name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -98,8 +105,17 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
                                         </div>
-                                        <input class="form-control" name="last_name" placeholder="ادخل الإسم الاخير"
-                                            type="text">
+                                        <input class="form-control @error('last_name') is-invalid @enderror"
+                                            value="{{ old('last_name') }}" name="last_name"
+                                            placeholder="ادخل الإسم الاخير" type="text">
+
+                                        @error('last_name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+
+
                                     </div>
                                 </div>
 
@@ -109,8 +125,15 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                                         </div>
-                                        <input class="form-control" name="email" placeholder="ادخل الإيميل"
+                                        <input class="form-control @error('email') is-invalid @enderror"
+                                            value="{{ old('email') }}" name="email" placeholder="ادخل الإيميل"
                                             type="email">
+
+                                        @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -119,8 +142,15 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                         </div>
-                                        <input class="form-control" name="phone" placeholder="ادخل رقم التلفون"
+                                        <input class="form-control @error('phone') is-invalid @enderror"
+                                            value="{{ old('phone') }}" name="phone" placeholder="ادخل رقم التلفون"
                                             type="text">
+
+                                        @error('phone')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -130,8 +160,15 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                         </div>
-                                        <input class="form-control" name="bank_IBAN" placeholder="ادخل  ايبان البنك"
-                                            type="text">
+                                        <input class="form-control @error('bank_IBAN') is-invalid @enderror"
+                                            value="{{ old('bank_IBAN') }}" name="bank_IBAN"
+                                            placeholder="ادخل  ايبان البنك" type="text">
+
+                                        @error('bank_IBAN')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -154,8 +191,15 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                         </div>
-                                        <input class="form-control" name="password" placeholder="ادخل كلمة المرور"
-                                            type="password">
+                                        <input class="form-control @error('password') is-invalid @enderror"
+                                            value="{{ old('password') }}" name="password"
+                                            placeholder="ادخل كلمة المرور" type="password">
+
+                                        @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -164,25 +208,26 @@
                                 <div class="form-group">
                                     <div class="input-group input-group-merge input-group-alternative">
 
-                                        <textarea name="social_media_accounts" class="form-control" id="" cols="2" rows="2"></textarea>
+                                        <textarea name="social_media_accounts" class="form-control" id="" cols="2"
+                                            rows="2">{{ old('social_media_accounts') }}</textarea>
                                     </div>
                                 </div>
-                                
-                              
+
+
 
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-primary "> إنشاء حساب مشهور</button>
-                                 
+
                                 </div>
                                 <br>
 
                                 <div class="form-group">
-                                
-                                        <div class="input-group-prepend">
-                                            <label >
-                                                هل لديك حساب بالفعل ؟  <a href="{{ route('login') }}"> تسجيل دخول</a>
-                                              </label>                                       
-                                         </div>
+
+                                    <div class="input-group-prepend">
+                                        <label>
+                                            هل لديك حساب بالفعل ؟ <a href="{{ route('login') }}"> تسجيل دخول</a>
+                                        </label>
+                                    </div>
 
                                 </div>
                             </form>

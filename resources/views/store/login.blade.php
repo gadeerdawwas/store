@@ -80,6 +80,16 @@
                             <div class="text-center text-muted mb-4">
                                 <h2>تسجيل دخول حساب شركة</h2>
                             </div>
+                            {{-- @if ($errors->any())
+
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $message)
+                                        <li>{{ $message }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif --}}
                             <form method="POST" action="{{ route('storelogin') }}" method="POST">
                                 @csrf
                                 <input type="hidden" value="store" name="guard">
@@ -90,9 +100,14 @@
                                     <div class="input-group input-group-merge input-group-alternative mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-email-83"></i></span>
-                                        </div>
-                                        <input class="form-control" name="email" placeholder="ادخل الإيميل"
-                                            type="email">
+                                        </div> 
+                                        <input class="form-control @error('email') is-invalid @enderror" name="email" placeholder="ادخل الإيميل"
+                                        type="email">
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                     </div>
                                 </div>
 
@@ -103,8 +118,13 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                         </div>
-                                        <input class="form-control" name="password" placeholder="ادخل كلمة المرور"
+                                        <input class="form-control @error('password') is-invalid @enderror" name="password" placeholder="ادخل كلمة المرور"
                                             type="password">
+                                        @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                

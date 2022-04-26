@@ -4,12 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Store;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\StoreStoreRequest;
-use App\Http\Requests\UpdateStoreRequest;
-use Illuminate\Support\Facades\Validator;
-use Symfony\Component\HttpFoundation\Response;
 
 class StoreController extends Controller
 {
@@ -20,7 +15,8 @@ class StoreController extends Controller
      */
     public function index()
     {
-        //
+        $stores=Store::paginate(5);
+        return view('dashboard.stores.index',compact('stores',$stores));
     }
 
     /**
@@ -36,10 +32,10 @@ class StoreController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreStoreRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreStoreRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -47,10 +43,10 @@ class StoreController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Store  $store
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Store $store)
+    public function show($id)
     {
         //
     }
@@ -58,10 +54,10 @@ class StoreController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Store  $store
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Store $store)
+    public function edit($id)
     {
         //
     }
@@ -69,11 +65,11 @@ class StoreController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateStoreRequest  $request
-     * @param  \App\Models\Store  $store
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateStoreRequest $request, Store $store)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -81,12 +77,13 @@ class StoreController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Store  $store
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Store $store)
+    public function destroy($id)
     {
-        //
+        Store::find($id)->delete();
+        return redirect()->back()->with('success', 'تم  حذف المستخدم بنجاح');
     }
 
     public function stores()
@@ -95,20 +92,34 @@ class StoreController extends Controller
     }
     public function storelogin(Request $request)
     {
-        $validator=Validator($request->all(),[
+        // $validator=Validator($request->all(),[
+        //     'email' => 'required|string|exists:stores,email',
+        //     'password' =>'required|string'
+        // ]
+        // ,
+        // [
+        //     'email.required' => 'The email field is required.' ,
+        //     'email.exists' => 'The email field is incorrect.' ,
+        //     'password.required' => 'The email field is required.' ,
+        // ]
+        // );
+
+        $validator= $request->validate([
             'email' => 'required|string|exists:stores,email',
             'password' =>'required|string'
-        ]);
-        if (!$validator->fails()) {
+            ]);
+        try {
             $store=Store::where('email','=',$request->email)->first();
-            if (Hash::check($request->password ,$store->password)) {
-                return redirect('/dashboard');
-            }else{
-                return redirect('/login');
-            }
+        if (Hash::check($request->password ,$store->password)) {
+            return redirect('/admin')->with('success','Success login');
         }else{
-            return redirect('/login');
+            return redirect()->back()->withErrors('message','login fails');
         }
+        } catch (\Throwable $th) {
+            return redirect()->back()
+            ->withErrors('message', 'login fails');  
+        }
+    
     }
 
 
@@ -118,9 +129,7 @@ class StoreController extends Controller
     }
     public function createstores(Request $request)
     {
-        
-        $validator= Validator(  $request->all(),
-        [
+        $validator= $request->validate([
             'email' => ['required', 'string', 'email', 'max:255', 'unique:stores'],
             'store_owner' => ['required', 'string', 'max:255', 'unique:stores'],
             'username' => ['required', 'string', 'max:255', 'unique:stores'],
@@ -128,23 +137,24 @@ class StoreController extends Controller
             'bank_IBAN' => ['required', 'string'],
             'phone' => ['required', 'string'],
             'password' => ['required', 'string', 'min:8'],
+            ]);
 
-        ]);
 
-        
-        if (! $validator->fails()) {
-           Store::create([
-            'email' => $request->email ,
-            'store_owner' =>  $request->store_owner ,
-            'username' =>  $request->username ,
-            'store_name' =>  $request->store_name ,
-            'bank_IBAN' =>  $request->bank_IBAN ,
-            'phone' =>  $request->phone ,
-           'password' =>  Hash::make($request->password),
-           ]);
-           return redirect('/dashboard');
-        }else{
-
-        }
+            try {
+                Store::create([
+                    'email' => $request->email ,
+                    'store_owner' =>  $request->store_owner ,
+                    'username' =>  $request->username ,
+                    'store_name' =>  $request->store_name ,
+                    'bank_IBAN' =>  $request->bank_IBAN ,
+                    'phone' =>  $request->phone ,
+                   'password' =>  Hash::make($request->password),
+                   ]);
+                   return redirect('/admin');
+            } catch (\Throwable $th) {
+                return redirect()->back()
+                ->with('error', 'لم تتم عملية التسجيل');
+            }
+           
     }
 }

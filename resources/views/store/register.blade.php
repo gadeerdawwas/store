@@ -86,13 +86,54 @@
                             
 
 
+                            <div class="form-group">
+                                <div class="input-group input-group-merge input-group-alternative mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                                    </div>
+                                    <input class="form-control @error('email') is-invalid @enderror"
+                                        value="{{ old('email') }}" name="email" placeholder="ادخل الإيميل"
+                                        type="email">
+
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
                                 <div class="form-group">
-                                    <div class="input-group input-group-merge input-group-alternative mb-3">
+                                    <div class="input-group input-group-merge input-group-alternative">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                                            <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                         </div>
-                                        <input class="form-control" name="email" placeholder="ادخل الإيميل"
-                                            type="email">
+                                        <input class="form-control @error('store_owner') is-invalid @enderror"
+                                            value="{{ old('store_owner') }}" name="store_owner"
+                                            placeholder="ادخل اسم صاحب المتجر " type="text">
+                                        @error('store_owner')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group input-group-merge input-group-alternative">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                                        </div>
+                                        <input class="form-control @error('username') is-invalid @enderror"
+                                            value="{{ old('username') }}" name="username"
+                                            placeholder="ادخل اسم المستخدم" type="text">
+                                        @error('username')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+
                                     </div>
                                 </div>
 
@@ -101,17 +142,15 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                         </div>
-                                        <input class="form-control" name="store_owner" placeholder="ادخل اسم صاحب المتجر "
-                                            type="text">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group input-group-merge input-group-alternative">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                                        </div>
-                                        <input class="form-control" name="username" placeholder="ادخل اسم المستخدم"
-                                            type="text">
+                                        <input class="form-control @error('store_name') is-invalid @enderror"
+                                            value="{{ old('store_name') }}" name="store_name"
+                                            placeholder="ادخل اسم المتجر" type="text">
+
+                                        @error('store_name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -120,61 +159,71 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                         </div>
-                                        <input class="form-control" name="store_name" placeholder="ادخل اسم المتجر"
-                                            type="text">
+                                        <input class="form-control @error('phone') is-invalid @enderror"
+                                            value="{{ old('phone') }}" name="phone"
+                                            placeholder="ادخل رقم التلفون " type="text">
+
+                                        @error('phone')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
+
+
 
                                 <div class="form-group">
                                     <div class="input-group input-group-merge input-group-alternative">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                         </div>
-                                        <input class="form-control" name="phone" placeholder="ادخل رقم التلفون "
-                                            type="text">
+                                        <input class="form-control @error('bank_IBAN') is-invalid @enderror"
+                                            value="{{ old('bank_IBAN') }}" name="bank_IBAN"
+                                            placeholder="ادخل  ايبان البنك" type="text">
+
+                                        @error('bank_IBAN')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
 
-                               
-                               
+
                                 <div class="form-group">
                                     <div class="input-group input-group-merge input-group-alternative">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                         </div>
-                                        <input class="form-control" name="bank_IBAN" placeholder="ادخل  ايبان البنك"
-                                            type="text">
+                                        <input class="form-control @error('password') is-invalid @enderror"
+                                            value="{{ old('password') }}" name="password"
+                                            placeholder="ادخل كلمة المرور" type="password">
+                                        @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
 
-                              
-                                <div class="form-group">
-                                    <div class="input-group input-group-merge input-group-alternative">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                                        </div>
-                                        <input class="form-control" name="password" placeholder="ادخل كلمة المرور"
-                                            type="password">
-                                    </div>
-                                </div>
 
-                              
-                                
-                              
+
+
 
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-primary "> إنشاء حساب شركة</button>
-                                 
+
                                 </div>
                                 <br>
 
                                 <div class="form-group">
-                                
-                                        <div class="input-group-prepend">
-                                            <label >
-                                                هل لديك حساب بالفعل ؟  <a href="{{ route('stores') }}"> تسجيل دخول</a>
-                                              </label>                                       
-                                         </div>
+
+                                    <div class="input-group-prepend">
+                                        <label>
+                                            هل لديك حساب بالفعل ؟ <a href="{{ route('stores') }}"> تسجيل دخول</a>
+                                        </label>
+                                    </div>
 
                                 </div>
                             </form>
