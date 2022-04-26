@@ -11,69 +11,69 @@
                             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                                 <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
                                 <li class="breadcrumb-item"><a href="#">لوحة تحكم</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">جدول المشاهير </li>
+                                <li class="breadcrumb-item active" aria-current="page">جدول البنوك </li>
                             </ol>
                         </nav>
                     </div>
 
                 </div>
+                
                 <!-- Card stats -->
                 <div class="row">
                     <div class="col">
                         <div class="card">
                             <!-- Card header -->
                             <div class="card-header border-0">
-                                <h3 class="mb-0" style="    float: right;">جدول المشاهير</h3>
+                                <h3 class="mb-0" style="    float: right;">جدول البنوك</h3>
+
+                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+                                data-target="#exampleModal" title=" اضافة"><i
+                                    class="fa fa-close"></i> اضافة</button>
+
                             </div>
+                           
+                          
+                           
+                           
                             <!-- Light table -->
                             <div class="table-responsive">
                                 <table class="table align-items-center table-flush text-center">
                                     <thead class="thead-light">
                                         <tr>
-                                            <th style="padding: 0">الإسم الاول</th>
-                                            <th style="padding: 0">الإسم الأخير</th>
-                                            <th>الإيميل</th>
-                                            <th>رقم التلفون</th>
-                                            <th> ايبان البنك </th>
-                                            <th>اسم البنك</th>
-                                            {{-- <th> حسابات التواصل الاجتماعي </th> --}}
+                                            <th style="padding: 0">الإسم البنك</th>
+                                            
                                             <th>العمليات </th>
 
                                         </tr>
                                     </thead>
                                     <tbody class="list ">
-                                        @foreach ($users as $user)
+                                        @foreach ($banks as $bank)
                                             <tr>
-                                                <th> {{ $user->first_name }}</th>
-                                                <th> {{ $user->last_name }}</th>
-                                                <th> {{ $user->email }}</th>
-                                                <th> {{ $user->phone }}</th>
-                                                <th> {{ $user->bank_IBAN }}</th>
-                                                <th> {{ $user->bank_name }}</th>
-                                                {{-- <th > {{$user->social_media_accounts}}</th> --}}
+                                                <th> {{ $bank->name }}</th>
+                                     
                                                 <td>
 
                                                     <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                                        data-target="#exampleModaldelete{{ $user->id }}" title=" حذف"><i
+                                                        data-target="#exampleModaldelete{{ $bank->id }}" title=" حذف"><i
                                                             class="fa fa-close"></i> حذف</button>
 
-                                                    @if ($user->status == 0)
+                                               
                                                         <button type="button" class="btn btn-info btn-sm"
                                                             data-toggle="modal"
-                                                            data-target="#exampleModalconvert{{ $user->id }}"
-                                                            title=" مشاهدة "> مشاهدة </button>
-                                                    @endif
+                                                            data-target="#exampleModalconvert{{ $bank->id }}"
+                                                            title=" تعديل "> تعديل </button>
+                                                 
 
                                                 </td>
 
-                                                <div class="modal fade" id="exampleModaldelete{{ $user->id }}"
+                                                <div class="modal fade" id="exampleModaldelete{{ $bank->id }}"
                                                     tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                                     aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-body">
                                                                 <form
-                                                                    action="{{ route('admin.users.destroy', $user->id) }}"
+                                                                    action="{{ route('admin.banks.destroy', $bank->id) }}"
                                                                     method="post">
                                                                     @method('delete')
                                                                     @csrf
@@ -96,7 +96,7 @@
 
                                                     </div>
                                                 </div>
-                                                <div class="modal fade" id="exampleModalconvert{{ $user->id }}"
+                                                <div class="modal fade" id="exampleModalconvert{{ $bank->id }}"
                                                     tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                                     aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -108,36 +108,12 @@
 
                                                                     @csrf
                                                                     <h5 class="modal-title" style="display: flex;"
-                                                                        id="exampleModalLabel"> بيانات المشهور </h5>
+                                                                        id="exampleModalLabel"> تعديل اسم البنك </h5>
 
                                                                     <br>
 
 
-                                                                    <div style="text-align: initial;">
-
-                                                                        <h3><label for=""> الإسم :
-                                                                                {{ $user->first_name }}
-                                                                                {{ $user->last_name }}
-                                                                            </label> </h3>
-
-
-                                                                        <h3> <label for=""> الإيميل :
-                                                                                {{ $user->email }} </label> </h3>
-
-                                                                        <h3> <label for=""> رقم التلفون:
-                                                                                {{ $user->phone }}</label> </h3>
-
-                                                                        <h3> <label for=""> ايبان البنك :
-                                                                                {{ $user->bank_IBAN }}</label> </h3>
-
-                                                                        <h3> <label for=""> اسم البنك :
-                                                                                {{ $user->bank_name }}</label> </h3>
-
-                                                                        <h3> <label for=""> حسابات التواصل الاجتماعي :
-                                                                                {{ $user->social_media_accounts }}</label>
-                                                                        </h3>
-
-                                                                    </div>
+                                                                    
 
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-secondary"
@@ -166,12 +142,46 @@
                                     <div class="col-md-7 col-sm-7">
                                         <div class="dataTables_paginate paging_bootstrap_full_number"
                                             id="sample_1_paginate">
-                                            {{ $users->links('pagination::bootstrap-4') }}
+                                            {{ $banks->links('pagination::bootstrap-4') }}
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="exampleModal"
+                    tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <form
+                                    action="{{route('admin.banks.index')}}"
+                                    method="post">
+                                    @csrf
+                                    <h5 class="modal-title" style="display: flex;"
+                                        id="exampleModalLabel"> أضافة بنك </h5>
+
+                                        <div class="modal-body">					
+                                            <div class="form-group">
+                                                <h3><label  style="display: flex;" >اسم البنك</label></h3>
+                                                <input type="text" required name='name' class="form-control" required>
+                                            </div>
+                                                          
+                                        </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">اغلاق</button>
+                                        <button type="submit"
+                                            class="btn btn-danger">حفظ</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

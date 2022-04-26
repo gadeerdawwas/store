@@ -61,10 +61,12 @@
               </svg>
             </button>
 
+           
+
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mx-auto nav-pills">
                 <li class="nav-item">
-                  <a class="nav-link" href="{{route('stores')}}">Company Registration</a>
+                  <a class="nav-link" href="{{route('createstore')}}">Company Registration</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{{ route('register') }}">Famous Registration</a>

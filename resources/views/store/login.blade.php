@@ -51,7 +51,7 @@
                 <ul class="navbar-nav mr-auto">
 
                     <li class="nav-item">
-                        <a href="{{ route('stores') }}" class="nav-link">
+                        <a href="{{ route('storeslogin') }}" class="nav-link">
                             <span class="nav-link-inner--text">تسجيل دخول</span>
                         </a>
                     </li>

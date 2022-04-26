@@ -18156,7 +18156,7 @@ a.text-darker:focus
 .avatar-lg
 {
     font-size: .875rem; 
-
+    margin-left: 14px;
     width: 58px;
     height: 58px;
 }
@@ -21437,7 +21437,7 @@ textarea[resize='horizontal']
 {
     font-size: .9375rem;
     line-height: 1.5rem; 
-
+    padding: 0 5px 2px 13px;
     min-width: 2rem;
 }
 .navbar-vertical .navbar-nav .nav-link .dropdown-menu
@@ -22105,7 +22105,7 @@ textarea[resize='horizontal']
 
 .navbar-vertical.navbar-expand-xs.fixed-right + .main-content
 {
-    margin-right: 62px;
+    /* margin-right: 62px; */
 }
 
 @media (min-width: 576px)
@@ -22172,7 +22172,7 @@ textarea[resize='horizontal']
 
 .sidenav.fixed-right + .main-content
 {
-    margin-right: 62px;
+    /* margin-right: 62px; */
 
     transition: all .15s ease;
 }
@@ -22249,7 +22249,8 @@ textarea[resize='horizontal']
 .g-sidenav-show .sidenav .nav-link-text
 {
     transition: .3s ease;
-
+    font-size: 18px;
+    color: #172b4d;
     opacity: 1;
 }
 
@@ -22337,6 +22338,16 @@ textarea[resize='horizontal']
         transition: none;
     }
 }
+@media screen and (max-width: 700px) {
+  
+  }
+  
+  /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
+  @media screen and (max-width: 400px) {
+  
+  }
+
+
 
 .sidenav-toggler-line
 {

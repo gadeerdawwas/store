@@ -2,27 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Bank;
 use Illuminate\Http\Request;
-use SweetAlert;
 
-class UserController extends Controller
+class BankController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {    
-
-        $users=User::paginate(5);
-        return view('dashboard.user.index',compact('users',$users));
+    {
+        $banks=Bank::paginate(5);
+        return view('dashboard.bank.index',compact('banks',$banks));
     }
 
     /**
@@ -32,7 +25,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+       // 
+       
     }
 
     /**
@@ -43,7 +37,25 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      
+     
+        $validator = validator($request->all(),[
+            'name'=> ['required', 'unique:banks'],
+        ]);
+
+
+        if (! $validator->fails() ) {
+            Bank::create([
+                'name' => $request->name
+            ]);
+            alert()->success('تمت عملية الإضافة بنجاح.');
+            return redirect()->back();
+        }else{
+            alert()->error('فشلت عملية الإضافة  . ');
+            return redirect()->back();
+
+        }
+
     }
 
     /**
@@ -88,8 +100,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::find($id)->delete();
+        Bank::find($id)->delete();
         alert()->success('تمت عملية الحذف بنجاح.');
-
+        return redirect()->back();
     }
 }

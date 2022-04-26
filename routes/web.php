@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\BankController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\StoreAuthController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -16,24 +19,37 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
+// Route::get('/', function () {
+//     return view('index');
+// });
+
+Route::get('/storeloginsss', function () {
+    return view('store.login');
+});
+Route::get('/createstoresss', function () {
+    return view('store.register');
 });
 
 
-Auth::routes();
 
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('storelogin',[StoreController::class,'stores'])->name('stores');
-Route::post('storelogin',[StoreController::class,'storelogin'])->name('storelogin');
-Route::get('createstore',[StoreController::class,'createstore'])->name('createstore');
-Route::post('createstores',[StoreController::class,'createstores'])->name('createstores');
+
+Route::get('/',[StoreAuthController::class,'index']);
+
+Route::get('storeslogin',[StoreAuthController::class,'storeslogin'])->name('storeslogin');
+Route::post('storelogin',[StoreAuthController::class,'storelogin'])->name('storelogin');
+Route::get('createstore',[StoreAuthController::class,'createstore'])->name('createstore');
+Route::post('createstores',[StoreAuthController::class,'createstores'])->name('createstores');
+
+
+Auth::routes();
 
 Route::prefix('admin')->name('admin.')->group(function(){
-    Route::get('/', [Controller::class ,'index']);
+    Route::get('/', [HomeController::class ,'index']);
     Route::resource('stores', StoreController::class);
     Route::resource('users', UserController::class);
+    Route::resource('banks', BankController::class);
 });
 

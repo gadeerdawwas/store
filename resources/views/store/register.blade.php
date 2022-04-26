@@ -51,7 +51,7 @@
                 <ul class="navbar-nav mr-auto">
 
                     <li class="nav-item">
-                        <a href="{{ route('stores') }}" class="nav-link">
+                        <a href="{{ route('storeslogin') }}" class="nav-link">
                             <span class="nav-link-inner--text">تسجيل دخول</span>
                         </a>
                     </li>
@@ -221,7 +221,7 @@
 
                                     <div class="input-group-prepend">
                                         <label>
-                                            هل لديك حساب بالفعل ؟ <a href="{{ route('stores') }}"> تسجيل دخول</a>
+                                            هل لديك حساب بالفعل ؟ <a href="{{ route('storeslogin') }}"> تسجيل دخول</a>
                                         </label>
                                     </div>
 

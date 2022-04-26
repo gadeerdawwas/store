@@ -8,18 +8,27 @@
 
 <body>
   <!-- Sidenav -->
-  @include('dashboard.include.sidebar')
+  {{-- <div class="row"> --}}
+    {{-- <div class="col-md-3"> --}}
+      @include('dashboard.include.sidebar')
+    {{-- </div> --}}
   <!-- Main content -->
-  <div class="main-content" id="panel">
-    <!-- Topnav -->
-    @include('dashboard.include.header')
-    <!-- Header -->
-    <!-- Header -->
-    {{-- @include('dashboard.include.flash-message') --}}
+  {{-- <div class="col-md-9"> --}}
+    <div class="main-content" id="panel">
+      <!-- Topnav -->
+      @include('dashboard.include.header')
+      <!-- Header -->
+      <!-- Header -->
+      {{-- @include('dashboard.include.flash-message') --}}
+      @include('sweet::alert')
 
-    @yield('content')
-    <!-- Page content -->
-    
+      @include('vendor.sweetalert.alert')
+
+      @yield('content')
+      <!-- Page content -->
+      
+    {{-- </div> --}}
+  {{-- </div> --}}
   </div>
   <!-- Argon Scripts -->
   <!-- Core -->

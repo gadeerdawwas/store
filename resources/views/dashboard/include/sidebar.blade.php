@@ -18,7 +18,11 @@
                             <span class="nav-link-text">لوحة تحكم</span>
                         </a>
                     </li>
-
+                    @if(Auth::guard('store')->check())
+                    Hi {{Auth::guard('store')->user()->email}}
+                    @elseif(Auth::guard('web')->check())
+                        Hiiiii {{Auth::guard('web')->user()->email}}
+                    @endif
 
                 </ul>
                 <!-- Divider -->
@@ -39,6 +43,12 @@
                             <span class="nav-link-text">   أصحاب المتاجر   </span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.banks.index') }}">
+                            <i class="ni ni-briefcase-24"></i>
+                            <span class="nav-link-text">    البنوك   </span>
+                        </a>
+                    </li>
 
 
 
@@ -52,7 +62,7 @@
 
 
               <li class="nav-item">
-                  <a class="nav-link" href="{{ route('logout') }}"
+                  <a class="nav-link"  style="position: absolute;bottom: 3px;"  href="{{ route('logout') }}"
                       onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                       <i class="ni ni-chart-pie-35" style="padding-left: 10px;"></i>
                       <span class="nav-link-text"> تسجيل الخروج </span>

@@ -34,9 +34,7 @@
                         <th >اسم المتجر </th>
                         <th >الإيميل</th>
                         <th >رقم التلفون</th>
-                        {{-- <th > ايبان البنك </th> --}}
                         <th >اسم المستخدم</th>
-                        {{-- <th> حسابات التواصل الاجتماعي </th> --}}
                         <th>العمليات </th>
                    
                       </tr>
@@ -48,9 +46,7 @@
                         <th > {{$store->store_name}}</th>
                         <th > {{$store->email}}</th>
                         <th > {{$store->phone}}</th>
-                        {{-- <th > {{$store->bank_IBAN}}</th> --}}
-                        <th > {{$store->username}}</th>
-                        {{-- <th > {{$store->social_media_accounts}}</th> --}}
+                        <th > {{$store->storename}}</th>
                         <td>
 
                           <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
@@ -105,6 +101,31 @@
                                           @csrf
                                           <h5 class="modal-title" style="display: flex;"
                                               id="exampleModalLabel"> بيانات صاحب المتجر </h5>
+                                          <br>
+                                          <div style="text-align: initial;">
+                                                                      
+                                            <h3 ><label for="">  اسم صاحب المتجر   :
+                                                    {{ $store->store_owner }} 
+                                               
+                                                </label> </h3>
+                                     
+                                           
+                                            <h3 > <label for="">   اسم المتجر   :
+                                                    {{ $store->store_name }}    </label> </h3>
+                                          
+                                            <h3 > <label for="">   الايميل  :
+                                                    {{ $store->email }}</label> </h3>
+
+                                            <h3 > <label for="">رقم التلفون  :                                        :
+                                                    {{ $store->phone }}</label> </h3>
+
+                                            <h3 > <label for="">   - اسم المستخدم :
+                                                    {{ $store->username }}</label> </h3>
+
+                                            <h3 > <label for="">   ايبان البنك  :
+                                                    {{ $store->bank_IBAN }}</label> </h3>
+
+                                        </div>
 
                                          
 
